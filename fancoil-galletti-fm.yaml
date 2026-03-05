@@ -1,6 +1,6 @@
 substitutions:
   fc_name: fancoil-soggiorno
-  fc_friendly_name: fancoil-soggiorno
+  fc_friendly_name: Fancoil-Soggiorno
   fc_comment: "Ventilconvettore Galletti FM soggiorno"
 
 # Caricamento modulare
@@ -34,3 +34,23 @@ wifi:
     subnet: !secret net_subnet
     dns1: !secret net_dns1
     dns2: !secret net_dns2
+    
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: ${fc_friendly_name}
+    password: !secret ap_fansogg
+
+button:
+  - platform: restart
+    name: $fc_name restart
+
+# Sincronizzazione temperatura (se diversa, imposta da 400008 a 300003)
+interval:
+  - interval: 10s
+    then:
+      - lambda: |-
+          if (id(actual_target_temp_raw).has_state() && id(set_temp_raw).has_state()) {
+            if ((int)id(actual_target_temp_raw).state != (int)id(set_temp_raw).state) {
+              id(set_temp_raw).make_call().set_value(id(actual_target_temp_raw).state).perform();
+            }
+          }
