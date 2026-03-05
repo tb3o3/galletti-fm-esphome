@@ -1,11 +1,12 @@
 esphome:
-  min_version: 2025.12.0
-  project:
-    name: "D1 Mini NodeMcu ESP8266-12F - TTL RS485"
-    version: "1.0.0"
   name: ${fc_name}
   friendly_name: ${fc_friendly_name}
   comment: ${fc_comment}
+  min_version: 2025.12.0
+  project:
+    name: "AZ-Delivery.D1Mini-NodeMcu-ESP8266-12F-TTLRS485-GallettuFM"
+    version: "1.0.0"
+
 
 # Configurazione specifica per la piattaforma ESP8266
 esp8266:
