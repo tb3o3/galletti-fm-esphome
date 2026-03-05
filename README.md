@@ -30,6 +30,19 @@ Link alla documentazione ESPHome [Modbus](https://esphome.io/components/modbus_c
 ### Diagnostica
 - Segnale Wi-Fi (dBm)
 
+# Instruzioni per l'utilizzo del codice
+1. Nella directory esphome (homeassistant/esphome) creare le directory hardware e common
+2. Copiare nella directory common i file wifi.yaml e modbus_galletti.yaml
+3. Copiare nella directory hardware il file d1_mini_galletti_fm.yaml
+4. Editare il file secrets.yaml di esphome (utilizzare un editor o direttamente da ESPHome Builder) per aggiungere wifi_ssid e wifi_password oltre alle password OTA ed AP, se si utilizza la configurazione IP Statico (consigliata) inserire anche i dati della rete (net_subnet per la sunbet, net_gtw per il gateway, net_dns1 per il primo DNS net_dns2 per il secondo DNS)
+5. Creare un nuovo device con ESPHome Builder
+6. Utilizzare il file fancoil-galletti-fm.yaml per popolare il proprio file .yaml, il file deve essere personalizzato impostando
+   - fc_name
+   - fc_friendly_name
+   - fc_comment
+   sostituire <REDACT> con la key api fornita in fase di creazione del device con ESPHome Builder
+   sostituire le variabili subito dopo !secret per OTA, configurazione rete ed AP
+
 ## INGLESE
 This ESPHome firmware allows you to integrate  [Galletti FM](https://www.galletti.com/en/hydronic_indoor_units_446/high-wall_mounted-fan-coil-units/high_wall_FM-EN) fan coils into Home Assistant via ESPHome Modbus and Wi-Fi.
 
@@ -59,3 +72,16 @@ ESPHome [Modbus](https://esphome.io/components/modbus_controller/) documentation
 
 ## Diagnostics
 - Wi-Fi Signal (dBm)
+
+# Instructions for using the code
+1. In the esphome directory (homeassistant/esphome) create the directories hardware and common
+2. Copy the files wifi.yaml and modbus_galletti.yaml into the common directory
+3. Copy the file d1_mini_galletti_fm.yaml into the hardware directory
+4. Edit the esphome secrets.yaml file (using an editor or directly from ESPHome Builder) to add wifi_ssid and wifi_password along with the OTA and AP passwords; if using a Static IP configuration (recommended), also enter the network data (net_subnet for the subnet, net_gtw for the gateway, net_dns1 for the first DNS, net_dns2 for the second DNS).
+5. Create a new device with ESPHome Builder
+6. Use the file fancoil-galletti-fm.yaml to populate your own .yaml file, the file must be customized by setting
+   - fc_name
+   - fc_friendly_name
+   - fc_comment
+   replace <REDACT> with the api key provided during the device creation phase with ESPHome Builder 
+   replace the variables immediately after !secret for OTA, network configuration, and AP
