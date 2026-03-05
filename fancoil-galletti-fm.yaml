@@ -25,4 +25,12 @@ api:
 # Abilita gli aggiornamenti OTA (Over-The-Air)
 ota:
   platform: esphome
-  password: "<REDACT>"
+  password: !secret ota_fansogg
+
+wifi:
+  manual_ip:
+    static_ip: !secret net_ipfansogg
+    gateway: !secret net_gtw
+    subnet: !secret net_subnet
+    dns1: !secret net_dns1
+    dns2: !secret net_dns2
