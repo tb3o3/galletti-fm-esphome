@@ -13,7 +13,7 @@ Link alla documentazione ESPHome Modbus [https://esphome.io/components/text_sens
 - Accensione/Spegnimento
 - Modalità (Raffreddamento - Deumidificazione - Ventilatore - Riscaldamento - Automatico)
 - Velocità ventola (Auto - Bassa - Media - Alta)
-- Angolo deflettore (1 - 2 - 3 - 4 - Auto - Stop) N.B.: verificare se possibile integrarlo
+- Angolo deflettore (1 - 2 - 3 - 4 - Auto)
 - Temperatura desiderata (16C° - 30C°)
 
 ### Sensori implementati
