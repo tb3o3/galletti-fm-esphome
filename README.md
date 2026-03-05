@@ -43,6 +43,8 @@ Link alla documentazione ESPHome [Modbus](https://esphome.io/components/modbus_c
    sostituire <REDACT> con la key api fornita in fase di creazione del device con ESPHome Builder
    sostituire le variabili subito dopo !secret per OTA, configurazione rete ed AP
 
+ATTENZIONE: se IP statici, OTA o AP non sono utilizzati non riportare le sezioni nel file .yaml del device
+
 ## INGLESE
 This ESPHome firmware allows you to integrate  [Galletti FM](https://www.galletti.com/en/hydronic_indoor_units_446/high-wall_mounted-fan-coil-units/high_wall_FM-EN) fan coils into Home Assistant via ESPHome Modbus and Wi-Fi.
 
@@ -85,3 +87,5 @@ ESPHome [Modbus](https://esphome.io/components/modbus_controller/) documentation
    - fc_comment
    replace <REDACT> with the api key provided during the device creation phase with ESPHome Builder 
    replace the variables immediately after !secret for OTA, network configuration, and AP
+
+WARNING: if static IPs, OTA, or AP are not used, do not include the sections in the device's .yaml file
