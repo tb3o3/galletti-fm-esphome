@@ -1,0 +1,28 @@
+substitutions:
+  fc_name: fancoil-soggiorno
+  fc_friendly_name: fancoil-soggiorno
+  fc_comment: "Ventilconvettore Galletti FM soggiorno"
+
+# Caricamento modulare
+packages:
+  # Wi-Fi
+  wifi: !include common/wifi.yaml
+  # Modbus
+  modbus: !include common/modbus_galletti.yaml
+  # Hardware 
+  hardware: !include hardware/d1_mini_galletti_fm
+
+# Configura il livello di log
+logger:
+    baud_rate: 0
+    level: NONE
+
+# Abilita l'API per la comunicazione con Home Assistant
+api:
+  encryption:
+    key: "<REDACT>"
+    
+# Abilita gli aggiornamenti OTA (Over-The-Air)
+ota:
+  platform: esphome
+  password: "<REDACT>"
