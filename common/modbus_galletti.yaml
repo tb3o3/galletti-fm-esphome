@@ -1,0 +1,133 @@
+# Configurazione modbus per i fancoil galetti FM
+modbus:
+  id: modbus1
+  uart_id: uart_bus
+
+modbus_controller:
+  - id: galletti
+    address: 1
+    modbus_id: modbus1
+    update_interval: 5s
+
+# ON/OFF
+switch:
+  - platform: modbus_controller
+    modbus_controller_id: galletti
+    id: fan_power
+    name: acceso_spento
+    address: 0x0000
+    register_type: coil
+    bitmask: 1
+
+# Modalità operativa
+select:
+  - platform: modbus_controller
+    modbus_controller_id: galletti
+    id: fan_mode
+    name: impostazione_modalita
+    address: 0x0000
+    register_count: 1
+    optionsmap:
+      "Cooling": 1
+      "Dehumidify": 2
+      "Fan Only": 4
+      "Heating": 8
+      "Auto": 16
+
+# Velocità ventola
+  - platform: modbus_controller
+    modbus_controller_id: galletti
+    id: fan_speed
+    name: velocita_ventola
+    address: 0x0001
+    register_count: 1
+    optionsmap:
+      "High": 1
+      "Medium": 2
+      "Low": 4
+      "Auto": 7
+
+# Louver swing (indipendente)
+  - platform: modbus_controller
+    modbus_controller_id: galletti
+    id: fan_louver_swing
+    name: oscillazione_aletta
+    address: 0x0002
+    register_count: 1
+    optionsmap:
+      "Stop": 0
+      "Pos 1": 1
+      "Pos 2": 2
+      "Pos 3": 3
+      "Pos 4": 4
+      "Auto": 15
+
+# Temperatura impostata (scrittura 300003)
+number:
+  - platform: modbus_controller
+    modbus_controller_id: galletti
+    id: set_temp_raw
+    name: temperatura_setpoint
+    address: 3
+    register_type: holding
+    value_type: U_WORD
+    min_value: 160
+    max_value: 300
+    step: 10
+    unit_of_measurement: "°C"
+
+# Temperatura ambiente (lettura da 400010)
+sensor:
+  - platform: modbus_controller
+    modbus_controller_id: galletti
+    id: room_temp_pcb
+    name: temperatura_stanza_pcb
+    address: 10
+    register_type: read
+    register_count: 1
+    value_type: U_WORD
+    unit_of_measurement: "°C"
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.1
+
+# Temperatura impostata effettiva (lettura da 400008)
+  - platform: modbus_controller
+    modbus_controller_id: galletti
+    id: actual_target_temp_raw
+    name: temperatura_attuale_impostata
+    address: 8
+    register_type: read
+    register_count: 1
+    value_type: U_WORD
+    unit_of_measurement: "°C"
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.1
+
+# Temperatura acqua fredda (lettura da 400003)
+  - platform: modbus_controller
+    modbus_controller_id: galletti
+    id: chilled_water_coil_temp_raw
+    name: temperatura_acqua_fredda
+    address: 3
+    register_type: read
+    register_count: 1
+    value_type: U_WORD
+    unit_of_measurement: "°C"
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.1
+
+  - platform: modbus_controller
+    modbus_controller_id: galletti
+    id: room_temp
+    name: temperatura_stanza
+    address: 2
+    register_type: read
+    register_count: 1
+    value_type: U_WORD
+    unit_of_measurement: "°C"
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.1
