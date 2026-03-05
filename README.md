@@ -50,6 +50,8 @@ Poiché in Home assistant non viene visto come un device di tipo clima si utiliz
 
 Incluso nel progetto è anche riportato climate_galletti.yaml di esempio per crarea l'entità
 
+![Template Climate](homeassistant_config/TemplateClimate.png)
+
 ## INGLESE
 This ESPHome firmware allows you to integrate  [Galletti FM](https://www.galletti.com/en/hydronic_indoor_units_446/high-wall_mounted-fan-coil-units/high_wall_FM-EN) fan coils into Home Assistant via ESPHome Modbus and Wi-Fi.
 
@@ -99,3 +101,5 @@ WARNING: if static IPs, OTA, or AP are not used, do not include the sections in 
 Since in Home Assistant it is not seen as a climate-type device, the [Template Climate](https://github.com/jcwillox/hass-template-climate) is used, which can be installed with HACS.
 
 Also included in the project is the example climate_galletti.yaml to create the entity
+
+![Template Climate](homeassistant_config/TemplateClimate.png)
