@@ -1,6 +1,6 @@
 # galletti-fm-esphome
 
-## Italiano
+## ITALIANO
 Questo firmware ESPHome permette di integrare i ventilconvettori [Galletti FM](https://www.galletti.com/terminali-idronici/ventilconvettori-a-parete-alta/parete_alta_FM) in Home Assistant attraverso ESPHome Modbus e Wi-Fi.
 
 Il firmware è stato provato e scritto per il seguente hardware, può comunque essere adattato ad altre schede di sviluppo compatibli ESP in base alle proprie esigenze e spazi (io li ho inserti nel ventilconvettore):
@@ -30,7 +30,7 @@ Link alla documentazione ESPHome [Modbus](https://esphome.io/components/modbus_c
 ### Diagnostica
 - Segnale Wi-Fi (dBm)
 
-## English
+## INGLESE
 This ESPHome firmware allows you to integrate  [Galletti FM](https://www.galletti.com/en/hydronic_indoor_units_446/high-wall_mounted-fan-coil-units/high_wall_FM-EN) fan coils into Home Assistant via ESPHome Modbus and Wi-Fi.
 
 The firmware has been tested and written for the following hardware, but it can still be adapted to other ESP-compatible development boards according to your own needs and space (I inserted them into the fan coil):
