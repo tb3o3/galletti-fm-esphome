@@ -1,0 +1,120 @@
+###### FANCOIL SOGGIORNO
+- platform: climate_template
+  name: "Fan coil Soggiorno"
+  unique_id: "fancoil_soggiorno_template_climate"
+  min_temp: 16
+  max_temp: 30
+  temp_step: 1
+  precision: 0.1
+
+  current_temperature_template: >
+    {{ states('sensor.fancoil_soggiorno_temperatura_stanza') | float(0) }}
+
+  target_temperature_template: >
+    {{ states('sensor.fancoil_soggiorno_temperatura_attuale_impostata') | float(0) }}
+
+  availability_template: >
+    {{ states('switch.fancoil_soggiorno_acceso_spento') in ['on', 'off'] }}
+
+  set_temperature:
+    service: number.set_value
+    target:
+      entity_id: number.fancoil_soggiorno_temperatura_setpoint
+    data:
+      value: "{{ (temperature * 10) | int }}"
+
+  modes:
+    - "off"
+    - "cool"
+    - "heat"
+    - "fan_only"
+    - "dry"
+    - "auto"
+
+  hvac_mode_template: >-
+    {% set power_state = states('switch.fancoil_soggiorno_acceso_spento') %}
+    {% set selected_mode = states('select.fancoil_soggiorno_impostazione_modalita') %}
+    {% if power_state == 'off' %}
+      off
+    {% elif selected_mode == 'Cooling' %}
+      cool
+    {% elif selected_mode == 'Heating' %}
+      heat
+    {% elif selected_mode == 'Fan Only' %}
+      fan_only
+    {% elif selected_mode == 'Dehumidify' %}
+      dry
+    {% elif selected_mode == 'Auto' %}
+      auto
+    {% else %}
+      off
+    {% endif %}
+
+  set_hvac_mode:
+    - choose:
+        - conditions: "{{ hvac_mode == 'off' }}"
+          sequence:
+            - service: switch.turn_off
+              target:
+                entity_id: switch.fancoil_soggiorno_acceso_spento
+      default:
+        - service: switch.turn_on
+          target:
+            entity_id: switch.fancoil_soggiorno_acceso_spento
+        - delay:
+            milliseconds: 250
+        - service: select.select_option
+          target:
+            entity_id: select.fancoil_soggiorno_impostazione_modalita
+          data:
+            option: >-
+              {% if hvac_mode == 'cool' %}
+                Cooling
+              {% elif hvac_mode == 'heat' %}
+                Heating
+              {% elif hvac_mode == 'fan_only' %}
+                Fan Only
+              {% elif hvac_mode == 'dry' %}
+                Dehumidify
+              {% elif hvac_mode == 'auto' %}
+                Auto
+              {% else %}
+                {{ states('select.fancoil_soggiorno_impostazione_modalita') }}
+              {% endif %}
+
+  fan_modes:
+    - "Low"
+    - "Medium"
+    - "High"
+    - "Auto"
+
+  fan_mode_template: "{{ states('select.fancoil_soggiorno_velocita_ventola') }}"
+  set_fan_mode:
+    service: select.select_option
+    target:
+      entity_id: select.fancoil_soggiorno_velocita_ventola
+    data:
+      option: "{{ fan_mode }}"
+
+  swing_modes:
+    - "on"
+    - "off"
+
+  swing_mode_template: >-
+    {% if states('select.fancoil_soggiorno_oscillazione_aletta') == 'Auto' %}
+      on
+    {% else %}
+      off
+    {% endif %}
+
+  set_swing_mode:
+    service: select.select_option
+    target:
+      entity_id: select.fancoil_soggiorno_oscillazione_aletta
+    data:
+      option: >-
+        {% if swing_mode == 'on' %}
+          Auto
+        {% else %}
+          Stop
+        {% endif %}
