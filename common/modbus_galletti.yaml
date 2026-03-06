@@ -67,7 +67,8 @@ number:
   - platform: modbus_controller
     modbus_controller_id: galletti
     id: set_temp_raw
-    name: temperatura_setpoint
+    name: temperatura_setpoint_raw
+    internal: true          # ← nasconde da Home Assistant
     address: 3
     register_type: holding
     value_type: U_WORD
@@ -76,6 +77,23 @@ number:
     step: 10
     unit_of_measurement: "°C"
 
+# Template number visibile in HA con valori "umani" (16-30°C)
+  - platform: template
+    id: set_temp
+    name: temperatura_setpoint
+    min_value: 16
+    max_value: 30
+    step: 1
+    unit_of_measurement: "°C"
+    device_class: temperature
+    lambda: |-
+      if (id(set_temp_raw).has_state()) {
+        return id(set_temp_raw).state / 10.0;
+      }
+      return {};
+    set_action:
+      - lambda: |-
+          id(set_temp_raw).make_call().set_value(x * 10).perform();
 # Temperatura ambiente (lettura da 400010)
 sensor:
   - platform: modbus_controller
