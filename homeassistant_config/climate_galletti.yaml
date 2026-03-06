@@ -19,9 +19,9 @@
   set_temperature:
     service: number.set_value
     target:
-      entity_id: number.fancoil_soggiorno_temperatura_setpoint
+      entity_id: number.fancoil_corridoio_temperatura_setpoint
     data:
-      value: "{{ (temperature * 10) | int }}"
+      value: "{{ temperature }}"
 
   modes:
     - "off"
