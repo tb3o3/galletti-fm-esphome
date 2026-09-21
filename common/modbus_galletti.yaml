@@ -26,7 +26,6 @@ select:
     id: fan_mode
     name: impostazione_modalita
     address: 0x0000
-    register_count: 1
     optionsmap:
       "Cooling": 1
       "Dehumidify": 2
@@ -40,7 +39,6 @@ select:
     id: fan_speed
     name: velocita_ventola
     address: 0x0001
-    register_count: 1
     optionsmap:
       "High": 1
       "Medium": 2
@@ -53,7 +51,6 @@ select:
     id: fan_louver_swing
     name: oscillazione_aletta
     address: 0x0002
-    register_count: 1
     optionsmap:
       "Stop": 0
       "Pos 1": 1
@@ -105,7 +102,6 @@ sensor:
     name: temperatura_stanza_pcb
     address: 10
     register_type: read
-    register_count: 1
     value_type: U_WORD
     unit_of_measurement: "°C"
     accuracy_decimals: 0
@@ -119,7 +115,6 @@ sensor:
     name: temperatura_attuale_impostata
     address: 8
     register_type: read
-    register_count: 1
     value_type: U_WORD
     unit_of_measurement: "°C"
     accuracy_decimals: 0
@@ -133,7 +128,6 @@ sensor:
     name: temperatura_acqua_fredda
     address: 3
     register_type: read
-    register_count: 1
     value_type: U_WORD
     unit_of_measurement: "°C"
     accuracy_decimals: 0
@@ -146,7 +140,6 @@ sensor:
     name: temperatura_stanza
     address: 2
     register_type: read
-    register_count: 1
     value_type: U_WORD
     unit_of_measurement: "°C"
     accuracy_decimals: 0
